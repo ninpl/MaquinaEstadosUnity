@@ -6,6 +6,7 @@ public class FSMController : MonoBehaviour {
 
 	State currentState;
 
+
 	void Start()
 	{
 		currentState = new EnterMine();
