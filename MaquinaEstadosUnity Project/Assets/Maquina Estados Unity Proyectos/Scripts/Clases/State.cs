@@ -15,6 +15,8 @@ public abstract class State
 	}
 
 	public abstract void Execute ();
+	public abstract void Enter (){}
+	public abstract void Exit (){}
 }
 
 public class EnterMine : State
@@ -35,6 +37,11 @@ public class EnterMine : State
 		{
 			FSM.ChangeState(new VisitBank(FSM));
 		}
+
+		if(FSM.player.sed >= 150)
+		{
+			FSM.ChangeState(new Quench(FSM));
+		}
 	}
 }
 
@@ -51,6 +58,18 @@ public class VisitBank : State
 		Debug.Log("Bank");
 		FSM.player.oro -= 3;
 		FSM.player.monedas += 2;
+
+		if(FSM.player.oro > 0) return;
+
+		if(FSM.player.monedas >= 100)
+		{
+			FSM.ChangeState(new GoHome(FSM));
+		}
+
+		if(FSM.player.monedas <= 100)
+		{
+			FSM.ChangeState(new EnterMine(FSM));
+		}
 	}
 }
 
@@ -65,6 +84,11 @@ public class Quench : State
 	{
 		Debug.Log("Quench");
 		FSM.player.sed -= 5;
+
+		if(FSM.player.sed <= 0)
+		{
+			FSM.ChangeState(new EnterMine(FSM));
+		}
 	}
 }
 
@@ -79,5 +103,10 @@ public class GoHome : State
 	{
 		Debug.Log("Home");
 		FSM.player.cansancio -= 5;
+
+		if(FSM.player.cansancio <= 0)
+		{
+			FSM.ChangeState(new EnterMine(FSM));
+		}
 	}
 }

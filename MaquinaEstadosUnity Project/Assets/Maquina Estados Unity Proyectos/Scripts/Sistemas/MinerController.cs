@@ -8,14 +8,4 @@ public class MinerController : MonoBehaviour {
 	public int sed = 0;
 	public int monedas = 0;
 	public int cansancio = 0;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
