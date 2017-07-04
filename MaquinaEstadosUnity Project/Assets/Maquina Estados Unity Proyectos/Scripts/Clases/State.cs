@@ -15,8 +15,8 @@ public abstract class State
 	}
 
 	public abstract void Execute ();
-	public abstract void Enter (){}
-	public abstract void Exit (){}
+	public virtual void Enter (){}
+	public virtual void Exit (){}
 }
 
 public class EnterMine : State
@@ -90,6 +90,12 @@ public class Quench : State
 			FSM.ChangeState(new EnterMine(FSM));
 		}
 	}
+
+	public override void Enter()
+	{
+		FSM.player.monedas -= 25;
+		Debug.Log("Pagada la entrada al garito");
+	}
 }
 
 public class GoHome : State
@@ -108,5 +114,11 @@ public class GoHome : State
 		{
 			FSM.ChangeState(new EnterMine(FSM));
 		}
+	}
+
+	public override void Exit()
+	{
+		FSM.player.monedas -= 25;
+		Debug.Log("Pagada la tarifa familiar");
 	}
 }

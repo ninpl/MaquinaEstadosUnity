@@ -26,6 +26,8 @@ public class FSMController : MonoBehaviour {
 	public void ChangeState(State newState)
 	{
 		prevState = currentState;
+		currentState.Exit();
 		currentState = newState;
+		currentState.Enter();
 	}
 }
