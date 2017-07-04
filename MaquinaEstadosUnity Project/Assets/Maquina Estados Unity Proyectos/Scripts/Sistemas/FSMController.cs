@@ -13,11 +13,13 @@ public class FSMController : MonoBehaviour {
 	void Start()
 	{
 		player = this.GetComponent<MinerController>();
-		currentState = new EnterMine();
+		currentState = new EnterMine(this);
 	}
 
 	void Update()
 	{
+		player.sed += 1;
+		player.cansancio += 1;
 		currentState.Execute();
 	}
 
